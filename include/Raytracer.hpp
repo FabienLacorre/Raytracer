@@ -4,7 +4,7 @@
 #define HEIGHT 640
 #define WIDTH 640
 
-struct Dot {
+struct Pos {
 	float x, y, z;
 };
 
@@ -13,7 +13,7 @@ struct Vector {
 };
 
 struct Ray {
-	Dot start;
+	Pos start;
 	Vector dir;
 };
 

@@ -3,6 +3,8 @@ NAME	= Game
 SRC	= ./src/main.cpp \
 	./src/Window.cpp \
 	./src/Scene.cpp \
+	./src/OBJ.cpp \
+	./src/OBJ_Sphere.cpp \
 
 OBJ	 = $(SRC:.cpp=.o)
 

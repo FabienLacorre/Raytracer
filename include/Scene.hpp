@@ -12,6 +12,8 @@ private:
 	sf::Uint8 *pixels;
 	sf::Texture *texture;
 	sf::Sprite *sprite;
+
+	void FillBackground(Color col);
 };
 
 #endif

@@ -11,21 +11,25 @@ Scene::Scene(Window &win, int width, int height){
 }
 
 Scene::~Scene(){
-
 }
 
 void Scene::Run(){
-	Color test = {0, 255, 0, 120};
+	Color Black = {0, 0, 0, 255};
+
 	while (1){
-		win->Clear();
-		for(int i = 0; i < WIDTH * HEIGHT * 4; i += 4) {
-			pixels[i] = test.r;
-			pixels[i+1] = test.g;
-			pixels[i+2] = test.b;
-			pixels[i+3] = test.a;
-		}
-		texture->update(pixels);
-		win->GetWindow().draw(*sprite);
-		win->Display();
+		this->win->Clear();
+		this->FillBackground(Black);
+		this->texture->update(pixels);
+		this->win->GetWindow().draw(*sprite);
+		this->win->Display();
+	}
+}
+
+void Scene::FillBackground(Color col){
+	for (int i = 0; i < WIDTH * HEIGHT * 4; i += 4) {
+		this->pixels[i] = col.r;
+		this->pixels[i+1] = col.g;
+		this->pixels[i+2] = col.b;
+		this->pixels[i+3] = col.a;
 	}
 }

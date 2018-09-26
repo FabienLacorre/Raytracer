@@ -1,7 +1,7 @@
 #include "Window.hpp"
 
-Window::Window(int x, int y):
-window(sf::VideoMode(x, y), "Game SFML"){
+Window::Window(std::string name, int x, int y):
+window(sf::VideoMode(x, y), name){
     this->window.setFramerateLimit(60);
 }
 

@@ -6,7 +6,7 @@
 
 class Window {
 public:
-    Window(int x, int y);
+    Window(std::string name, int x, int y);
     ~Window();
 
     sf::RenderWindow &GetWindow();

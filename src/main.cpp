@@ -3,7 +3,7 @@
 #include "Scene.hpp"
 
 int main(){
-	Window win(WIDTH, HEIGHT);
+	Window win("Raytracer", WIDTH, HEIGHT);
 	Scene mainScene(win, WIDTH, HEIGHT);
 	mainScene.Run();
 	return (0);

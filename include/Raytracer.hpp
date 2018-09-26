@@ -1,3 +1,6 @@
+#ifndef __RAYTRACER_HPP__
+#define __RAYTRACER_HPP__
+
 #define HEIGHT 640
 #define WIDTH 640
 
@@ -17,3 +20,5 @@ struct Ray {
 struct Color {
 	int r, g, b, a;
 };
+
+#endif

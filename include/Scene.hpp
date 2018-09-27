@@ -10,7 +10,7 @@ public:
 
 	void Run();
 	Pos ComputeCurrentRay(int x, int y, Pos camera);
-	float ComputeLight(float d, Pos ray, Pos camera, OBJ &s, Pos light);
+	float ComputeLight(float d, Pos ray, Pos camera, OBJ &s, Light light);
 	void PutColor(float angle, int x, int y, OBJ &obj);
 private:
 	Window *win;

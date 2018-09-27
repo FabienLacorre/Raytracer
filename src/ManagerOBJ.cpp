@@ -36,13 +36,12 @@ float ManagerOBJ::ComputeIntersect(int x, int y, Pos ray, Pos camera) {
 				this->currentObjHit = i;
 			}	
 		}
-		
 		i++;
 	}
 	return minD;
 }
 
-float ManagerOBJ::ComputeLight(float d, Pos ray, Pos camera){
+float ManagerOBJ::ComputeLight(sf::Uint8 *pixels, int x, int y, float d, Pos ray, Pos camera){
 	Pos impact = {0, 0, 0};
 	Pos normal = {0, 0, 0};
 	Pos l = {0, 0, 0};
@@ -53,12 +52,41 @@ float ManagerOBJ::ComputeLight(float d, Pos ray, Pos camera){
 	normal.x = impact.x - this->objects[this->currentObjHit]->GetPos().x;
 	normal.y = impact.y - this->objects[this->currentObjHit]->GetPos().y;
 	normal.z = impact.z - this->objects[this->currentObjHit]->GetPos().z;
-	l.x = lights[0]->x - impact.x;
-	l.y = lights[0]->y - impact.y;
-	l.z = lights[0]->z - impact.z;
-	normal = Normalise(normal);
-	l = Normalise(l);
-	float angle = (l.x * normal.x) + (l.y * normal.y) + (l.z * normal.z);
+
+	float angle = 0;
+	for (auto lum : this->lights){
+		l.x = lum->x - impact.x;
+		l.y = lum->y - impact.y;
+		l.z = lum->z - impact.z;
+		normal = Normalise(normal);
+		l = Normalise(l);
+		angle = (l.x * normal.x) + (l.y * normal.y) + (l.z * normal.z);	
+		if (angle > 0) {
+			Color col = this->objects[this->currentObjHit]->GetColor();
+			col.r *= angle; 
+			col.g *= angle;
+			col.b *= angle;
+			col.r += pixels[((x * WIDTH) + y) * 4];
+			col.g += pixels[(((x * WIDTH) + y) * 4) + 1];
+			col.b += pixels[(((x * WIDTH) + y) * 4) + 2];
+
+			if (col.r > 255){
+				col.r = 255;
+			}
+			if (col.g > 255){
+				col.g = 255;
+			}
+			if (col.b > 255){
+				col.b = 255;
+			}
+
+			pixels[((x * WIDTH) + y) * 4] = col.r;
+			pixels[(((x * WIDTH) + y) * 4) + 1] = col.g;
+			pixels[(((x * WIDTH) + y) * 4) + 2] = col.b;
+			pixels[(((x * WIDTH) + y) * 4) + 3] = 255;	
+		}
+	}
+	
 	return angle;
 }
 

@@ -14,7 +14,7 @@ public:
 	void AddObject(OBJ &obj);
 	void AddLight(Light *l);
 	float ComputeIntersect(int x, int y, Pos Ray, Pos camera);
-	float ComputeLight(float d, Pos ray, Pos camera);
+	float ComputeLight(sf::Uint8 *pixels, int x, int y, float d, Pos ray, Pos camera);
 	void PutColor(sf::Uint8 *pixels, float angle, int x, int y);
 private:
 	int currentObjHit;

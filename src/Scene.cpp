@@ -39,8 +39,9 @@ void Scene::Run(){
 	ManagerOBJ manager;
 
 	Color black = {0, 0, 0, 255};
-	Color white = {255, 255, 255, 255};
+	Color white = {255, 255, 255, 150};
 	Color blue = {51, 204, 204, 255};
+	Color red = {255, 0, 0, 255};
 
 	Pos camera = {0, 0, 0};
 	Pos ray = {0, 0, 0};
@@ -48,12 +49,18 @@ void Scene::Run(){
 	// add objs dans le manager //
 	OBJ_Sphere s1(-10, 0, 40, 5, white);
 	OBJ_Sphere s2(10, 0, 40, 5, blue);
+	OBJ_Sphere s3(0, 0, 40, 7, red);
 	manager.AddObject(s1);
 	manager.AddObject(s2);
+	manager.AddObject(s3);
 
 		// add lights //
 	Light light = {0, 0, 25, white};
+	Light light2 = {20, 40, 25, white};
+	Light light3 = {-20, -40, 25, white};
 	manager.AddLight(&light);
+	//manager.AddLight(&light2);
+	manager.AddLight(&light3);
 
 	this->win->Clear();
 	this->FillBackground(black);
@@ -63,8 +70,7 @@ void Scene::Run(){
 			ray = this->ComputeCurrentRay(x, y, camera);
 			float d = manager.ComputeIntersect(x, y, ray, camera);
 			if (d > 0) {
-				float angle = manager.ComputeLight(d, ray, camera);
-				manager.PutColor(this->pixels, angle, x, y);
+				manager.ComputeLight(pixels, x, y, d, ray, camera);
 			}
 		}
 	}

@@ -11,7 +11,7 @@ OBJ_Sphere::~OBJ_Sphere() {
 
 }
 
-float OBJ_Sphere::Intersect(Pos ray, Pos camera) {
+float OBJ_Sphere::Intersect(Pos ray, Pos camera) const {
 	float a = pow(ray.x, 2) + pow(ray.y, 2) + pow(ray.z, 2);
 	float b = 2 * ((ray.x * (camera.x - this->GetPos().x))
 		+ (ray.y * (camera.y - this->GetPos().y))

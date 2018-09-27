@@ -12,6 +12,8 @@ public:
 	void SetPos(Pos position);
 	Color GetColor() const;
 	void SetColor(Color col);
+
+	virtual float Intersect(Pos ray, Pos camera) const = 0;
 protected:
 	Pos pos;
 	Color color;

@@ -5,6 +5,7 @@ SRC	= ./src/main.cpp \
 	./src/Scene.cpp \
 	./src/OBJ.cpp \
 	./src/OBJ_Sphere.cpp \
+	./src/ManagerOBJ.cpp \
 
 OBJ	 = $(SRC:.cpp=.o)
 

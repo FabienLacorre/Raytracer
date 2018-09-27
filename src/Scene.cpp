@@ -4,6 +4,7 @@
 #include "Window.hpp"
 #include "Scene.hpp"
 #include "OBJ_Sphere.hpp"
+#include "ManagerOBJ.hpp"
 
 Scene::Scene(Window &win, int width, int height){
 	this->win = &win;
@@ -73,19 +74,24 @@ void Scene::PutColor(float angle, int x, int y, OBJ &obj){
 }
 
 void Scene::Run(){
+	ManagerOBJ manager;
 	Color Black = {0, 0, 0, 255};
 	Color blue = {51, 204, 204, 255};
-	OBJ_Sphere s1(0, 0, 30, 5, blue);
 	Pos camera = {0, 0, 0};
 	Pos light = {30, 30, 0};
 	Pos ray = {0, 0, 0};
+
+	// add objs dans le manager //
+	OBJ_Sphere s1(0, 0, 30, 5, blue);
+	manager.AddObject(s1);
+
 	this->win->Clear();
 	this->FillBackground(Black);
 
 	for (int y = 0; y < WIDTH; y++){
 		for (int x = 0; x < HEIGHT; x++){
 			ray = this->ComputeCurrentRay(x, y, camera);
-			float d = s1.Intersect(ray, camera);
+			float d = manager.ComputeIntersect(x, y, ray, camera);
 			if (d > 0) {
 				float angle = this->ComputeLight(d, ray, camera, s1, light);
 				this->PutColor(angle, x, y, s1);
